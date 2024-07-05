@@ -60,6 +60,39 @@ python -V
 此时系统默认Python版本切换为python3
 
 ## 拉取源码
+
+目前野火鲁班猫RK系列板卡使用的SDK主要是两种，分别是通用SDK和专用SDK。自2024年7月开始，新型号的RK系列板卡全面使用通用SDK，旧型号的板卡将逐步切换到通用SDK，其专用SDK也将进入预存档期，只进行BUG修复，不再添加新功能。
+
+以下是专用SDK和通用SDK的对比：
+
+-   稳定性：由于专用SDK已使用的时间长，修复用户反馈较多，相较于新版本的通用SDK稳定性更好，功能更完整。
+-   功能性：通用SDK使用了更新的内核版本，其余源码也更新，有更多新特性
+-   便利性：对于专用SDK来说，一个SOC型号对应一份SDK，SDK在编译中会产生大量缓存数据占据硬盘空间，如果同时使用多个SOC，就需要拉取多份SDK保存在本地，会占用多份空间，而这里面的大部分内容都是相同的，也不得不存储多份。通用SDK就很好的解决了这一问题，一份SDK就可以编译多个不同型号SOC的板卡，有效节省了编译空间。
+-   通用性：由于通用SDK中除了板级配置有差异，其他内容基本都是相同的，不同的位置也做了通用性处理，这就使得我们在开发过程中，一次修改可以应用到所有板卡中，大大减少了重复移植的过程。
+-   可维护性：由于LubanCat系列中子系列日益增加，通用SDK同时开发多个soc的特点，有效提升了产品的可维护性，做到对旧产品的超长期维护。
+-   构建命令：通用SDK与专用SDK编译命令基本一致，并且在通用SDK中增加了一些更加便利的命令，如使用make kconfig修改内核配置文件，开发更便利。
+
+### 拉取通用SDK
+
+```
+#github地址(用户使用)
+repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m lubancat_linux_generic.xml
+
+#内部地址(内部开发使用)
+repo init -u git@gitlab.ebf.local:rockchip/linux/manifests.git -b linux -m lubancat_linux_generic.xml
+
+#如果运行以上命令失败，提示：fatal: Cannot get https://gerrit.googlesource.com/git-repo/clone.bundle 
+#则可以在以上命令中添加 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo 
+#例如：
+
+repo --trace init --depth=1 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -u https://github.com/LubanCat/manifests.git -b linux -m lubancat_linux_generic.xml
+```
+
+
+### 拉取专用SDK
+
+以rk356x为例，如果使用rk3588处理器，将下面命令中的rk356x替换为rk3588
+
 ```
 #github地址(用户使用)
 repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk356x_linux_release.xml
@@ -73,8 +106,17 @@ repo init -u git@gitlab.ebf.local:rockchip/linux/manifests.git -b linux -m rk356
 
 repo --trace init --depth=1 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -u https://github.com/LubanCat/manifests.git -b linux -m rk356x_linux_release.xml 
 
-# 同步源码
+## 更新同步源码
+
+```
 .repo/repo/repo --trace sync -c -j4
+
+# 使用 --depth=1 拉取源码后，大部分仓库同步后仅有最新的一次提交，可以使用以下命令来获取完整的仓库
+# 进入git仓库内，例如kernel
+cd kernel
+# 获取整个仓库内容
+git fetch --unshallow
+
 ```
 
 --depth=1 可以在拉取时进行浅克隆，只拉取最新的一次提交，可以有效减少从网络拉取的内容。如果想拉取完整的带所有提交的内容，可以删除此选项。
@@ -90,6 +132,9 @@ sudo apt-get install -f
 ## 一键构建
 
 ```
+#选择要构建的板卡的处理器系列
+./build.sh chip
+
 #选择要构建的板卡的配置文件
 ./build.sh lunch
 
@@ -117,55 +162,6 @@ Which would you like? [0]:2
 ./build.sh updateimg
 ```
 
-<!-- ## 构建示例
-
-### LubanCat2 板卡 Debian 10 操作系统构建
-
-Debian/Ubuntu镜像构建之前，请查看相应目录下readme.md文件，安装构建工具，此构建工具不同版本不通用。
-
-```
-# 选择板卡配置文件，可直接指定配置文件名称，也可以用 ./build.sh lunch 来选择
-./build.sh BoardConfig-LubanCat2-debian.mk
-
-# U-Boot 编译
-./build.sh uboot
-
-# Kernel 编译
-/build.sh kernel
-
-# Recovery 编译
-source envsetup.sh rockchip_rk3568
-./build.sh recovery
-
-# Ubuntu 编译
-./build.sh debian
-
-# 打包update.img镜像
-./build.sh updateimg
-```
-
-### LubanCat2 板卡 Buildroot操作系统构建
-
-```
-# 选择板卡配置文件，可直接指定配置文件名称，也可以用 ./build.sh lunch 来选择
-./build.sh BoardConfig-LubanCat2-buildroot.mk
-
-# U-Boot 编译
-./build.sh uboot
-
-# Kernel 编译
-/build.sh kernel
-
-# Recovery 编译
-source envsetup.sh rockchip_rk3568
-./build.sh recovery
-
-# Buildroot 编译
-./build.sh buildroot
-
-# 打包update.img镜像
-./build.sh updateimg
-``` -->
 
 #### 注意
 
