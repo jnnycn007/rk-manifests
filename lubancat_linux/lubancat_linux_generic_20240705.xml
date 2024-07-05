@@ -19,5 +19,5 @@
   <project name="tools" revision="refs/tags/lbc-gen-rkr7" clone-depth="1"/>
   <project name="u-boot" revision="refs/tags/lbc-gen-rkr7.1" clone-depth="1"/>
   <project name="ubuntu" path="ubuntu20.04" revision="7997af91f96f4552f4a74de268d52aca11b87c18" upstream="ubuntu20.04" dest-branch="ubuntu20.04" clone-depth="1"/>
-  <project name="ubuntu" path="ubuntu22.04" revision="51a91644c291b164779a47dde3d6b9ecb680ee57" upstream="ubuntu22.04" dest-branch="ubuntu22.04" clone-depth="1"/>
+  <project name="ubuntu" path="ubuntu22.04" revision="c303dc031679158cae50525393ab18ffa516a10d" upstream="ubuntu22.04" dest-branch="ubuntu22.04" clone-depth="1"/>
 </manifest>
