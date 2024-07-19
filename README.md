@@ -105,6 +105,7 @@ repo init -u git@gitlab.ebf.local:rockchip/linux/manifests.git -b linux -m rk356
 #例如：
 
 repo --trace init --depth=1 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -u https://github.com/LubanCat/manifests.git -b linux -m rk356x_linux_release.xml 
+```
 
 ## 更新同步源码
 
@@ -123,7 +124,7 @@ git fetch --unshallow
 
 # 构建板卡通用镜像
 
-##安装构建根文件系统依赖
+## 安装构建根文件系统依赖
 ```
 sudo dpkg -i debian/ubuntu-build-service/packages/*
 sudo apt-get install -f
@@ -132,16 +133,16 @@ sudo apt-get install -f
 ## 一键构建
 
 ```
-#选择要构建的板卡的处理器系列
+# 选择要构建的板卡的处理器系列
 ./build.sh chip
 
-#选择要构建的板卡的配置文件
+# 选择要构建的板卡的配置文件
 ./build.sh lunch
 
-#输入对应板卡不同系统配置文件前的序号
+# 输入对应板卡不同系统配置文件前的序号
 Which would you like? [0]:2
 
-#一键编译
+# 一键编译
 ./build.sh
 ```
 
@@ -170,3 +171,77 @@ Which would you like? [0]:2
 - 生成的镜像保存在 rockdev目录下
 - Ubuntu镜像需单独操作
 - 镜像详细构建流程请查看在线文档《[野火]嵌入式Linux镜像构建与部署—基于LubanCat-RK系列板卡》 https://doc.embedfire.com/linux/rk356x/build_and_deploy/zh/latest/index.html
+
+## 常见问题
+
+### 第一次拉取使用浅克隆，当前提交与仓库分支对应关系丢失，导致无法更新
+
+如果只需要当前SDK的最新一次提交，建议删除当前SDK重新拉取。
+
+如果本地有代码修改，建议在所在仓库创建新分支提交修改后按以下内容操作，以下操作会拉取所有仓库的所有提交历史，需要从网络获取较大文件。
+
+#### 错误提示1:
+```
+dev120:~/LubanCat_Linux_SDK$ repo sync -c
+
+... A new version of repo (2.45) is available.
+... You should upgrade soon:
+    cp /home/jiawen/LubanCat_Linux_SDK/.repo/repo/repo /home/jiawen/bin/repo
+
+fatal: 无效的上游 '2d91fecfd15e5a2c84297bbb1a06fe63e9f69a9c^1'
+
+================================================================================
+Repo command failed: UpdateManifestError
+```
+删除repo配置文件中的浅克隆配置：SDK目录下.repo/manifests.git/.repo_config.json
+找到文件中的下面三行删除
+```
+  "repo.depth": [
+    "1"
+  ],
+```
+然后在SDK目录下运行.repo/repo/repo sync -c更新
+
+
+#### 错误提示2:
+
+```
+dev120:~/LubanCat_Linux_SDK$ repo sync -c
+
+... A new version of repo (2.45) is available.
+... You should upgrade soon:
+    cp /home/jiawen/LubanCat_Linux_SDK/.repo/repo/repo /home/jiawen/bin/repo
+
+.repo/manifests/: discarding 56 commits removed from upstream
+首先，回退头指针以便在其上重放您的工作...
+应用：test
+使用索引来重建一个（三方合并的）基础目录树...
+M       rk356x_linux_release.xml
+回落到基础版本上打补丁及进行三方合并...
+自动合并 rk356x_linux_release.xml
+冲突（内容）：合并冲突于 rk356x_linux_release.xml
+打补丁失败于 0001 test
+Resolve all conflicts manually, mark them as resolved with
+"git add/rm <conflicted_files>", then run "git rebase --continue".
+You can instead skip this commit: run "git rebase --skip".
+To abort and get back to the state before "git rebase", run "git rebase --abort".
+error: 无法合并变更。
+提示：用 'git am --show-current-patch' 命令查看失败的补丁
+
+================================================================================
+Repo command failed: UpdateManifestError
+```
+删除repo配置文件中的浅克隆配置：SDK目录下.repo/manifests.git/.repo_config.json
+找到文件中的下面三行删除
+```
+  "repo.depth": [
+    "1"
+  ],
+```
+进入manifests仓库内，重置git rebase合并状态
+```
+cd .repo/manifests && git rebase --abort
+```
+然后在SDK目录下运行.repo/repo/repo sync -c更新
+
+
