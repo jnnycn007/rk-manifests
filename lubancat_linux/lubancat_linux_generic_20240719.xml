@@ -5,7 +5,7 @@
   
   <default remote="origin" sync-j="4"/>
   
-  <project name="debian11" path="debian" revision="fdc346975b764af1a0dcf91cf4cc433913f12ef6" upstream="debian11" dest-branch="debian11" clone-depth="1"/>
+  <project name="debian11" path="debian" revision="ba57303a0f967a082de4097a2c13e91cf8332fb5" upstream="debian11" dest-branch="debian11" clone-depth="1"/>
   <project name="device_rockchip" path="device/rockchip" revision="6ee6998d894479b624c6773e1930a7111c807597" upstream="main" dest-branch="main" clone-depth="1">
     <linkfile src="common/scripts/build.sh" dest="build.sh"/>
     <linkfile src="common/Makefile" dest="Makefile"/>
@@ -13,11 +13,11 @@
   </project>
   <project name="gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" revision="adbb295a970c4b39dc487c95226fe84d2c460072" upstream="master" clone-depth="1"/>
   <project name="gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf" path="prebuilts/gcc/linux-x86/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf" revision="2e89382ca3f8c34086272509ae4d7a5c340ffafc" upstream="master" clone-depth="1"/>
-  <project name="kernel" revision="c0f18d06bb6d0299fe18717477c373c8d9d04975" upstream="lbc-develop-5.10" dest-branch="lbc-develop-5.10" clone-depth="1"/>
+  <project name="kernel" revision="94dcdb587fc2e50370f9793fb978d7656ae35902" upstream="lbc-develop-5.10" dest-branch="lbc-develop-5.10" clone-depth="1"/>
   <project name="lubancat-bin" revision="bf9f8715ccf186c8563493c499f7be8057951330" upstream="main" dest-branch="main" clone-depth="1"/>
   <project name="rkbin" revision="refs/tags/lbc-gen-rkr7" clone-depth="1"/>
   <project name="tools" revision="refs/tags/lbc-gen-rkr7" clone-depth="1"/>
   <project name="u-boot" revision="refs/tags/lbc-gen-rkr7.1" clone-depth="1"/>
-  <project name="ubuntu" path="ubuntu20.04" revision="7997af91f96f4552f4a74de268d52aca11b87c18" upstream="ubuntu20.04" dest-branch="ubuntu20.04" clone-depth="1"/>
-  <project name="ubuntu" path="ubuntu22.04" revision="c303dc031679158cae50525393ab18ffa516a10d" upstream="ubuntu22.04" dest-branch="ubuntu22.04" clone-depth="1"/>
+  <project name="ubuntu" path="ubuntu20.04" revision="e0a786849f2cce59cc64f73b77bdcff9db32fc4b" upstream="ubuntu20.04" dest-branch="ubuntu20.04" clone-depth="1"/>
+  <project name="ubuntu" path="ubuntu22.04" revision="9fede487851e5cf8fbb75e659dcfc485fe27ff3e" upstream="ubuntu22.04" dest-branch="ubuntu22.04" clone-depth="1"/>
 </manifest>
