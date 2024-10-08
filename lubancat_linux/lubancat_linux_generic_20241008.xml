@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- <remote name="origin" fetch="ssh://git@gitlab.ebf.local/rockchip/linux/"/> -->
+  <remote name="origin" fetch="https://github.com/LubanCat/"/>
+  
+  <default remote="origin" sync-j="4"/>
+  
+  <project name="debian11" path="debian" revision="9dd9b9cb30da70a1a8423a3353e110d360849b95" upstream="debian11" dest-branch="debian11" clone-depth="1"/>
+  <project name="device_rockchip" path="device/rockchip" revision="ab11efadfe594acbcfb684bd50b59a35705e8386" upstream="main" dest-branch="main" clone-depth="1">
+    <linkfile src="common/scripts/build.sh" dest="build.sh"/>
+    <linkfile src="common/Makefile" dest="Makefile"/>
+    <linkfile src="common/scripts/rkflash.sh" dest="rkflash.sh"/>
+  </project>
+  <project name="gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" revision="adbb295a970c4b39dc487c95226fe84d2c460072" upstream="master" clone-depth="1"/>
+  <project name="gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf" path="prebuilts/gcc/linux-x86/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf" revision="2e89382ca3f8c34086272509ae4d7a5c340ffafc" upstream="master" clone-depth="1"/>
+  <project name="kernel" revision="4350fb6998fe9ab21754ba194737b89563d7ec3a" upstream="lbc-develop-5.10" dest-branch="lbc-develop-5.10" clone-depth="1"/>
+  <project name="lubancat-bin" revision="bf9f8715ccf186c8563493c499f7be8057951330" upstream="main" dest-branch="main" clone-depth="1"/>
+  <project name="rkbin" revision="refs/tags/lbc-gen-rkr8" clone-depth="1"/>
+  <project name="tools" revision="refs/tags/lbc-gen-rkr7" clone-depth="1"/>
+  <project name="u-boot" revision="refs/tags/lbc-gen-rkr7.1" clone-depth="1"/>
+  <project name="ubuntu" path="ubuntu20.04" revision="8c26c1079c90092c26e7ab7484a93d66f80f80c9" upstream="ubuntu20.04" dest-branch="ubuntu20.04" clone-depth="1"/>
+  <project name="ubuntu" path="ubuntu22.04" revision="34bcb591b279db18d9bd1519b63ca5afe10c37c4" upstream="ubuntu22.04" dest-branch="ubuntu22.04" clone-depth="1"/>
+</manifest>
