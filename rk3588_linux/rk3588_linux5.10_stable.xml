@@ -5,18 +5,18 @@
 
   <default remote="origin" sync-j="4"/>
   
-  <project name="debian11" path="debian" revision="refs/tags/stable-5.10.160" clone-depth="1"/>
-  <project name="device_rockchip" path="device/rockchip" revision="a85039a1513b2debd79f8e7ecc59c5cca01d1530" upstream="master" dest-branch="master">
+  <project name="debian11" path="debian" revision="84882b0a60a74260b1e1cc23b4a2a24714e1ba31" dest-branch="stable-5.10-rk3588" clone-depth="1"/>
+  <project name="device_rockchip" path="device/rockchip" revision="867ec16715f3d83e4010df9bcb1a1bce26be4ad0" dest-branch="master" clone-depth="1">
     <linkfile src="common/mkfirmware.sh" dest="mkfirmware.sh"/>
     <linkfile src="common/build.sh" dest="build.sh"/>
     <linkfile src="common/rkflash.sh" dest="rkflash.sh"/>
     <linkfile src="rk3588" dest="device/rockchip/.target_product"/>
   </project>
-  <project name="gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" revision="adbb295a970c4b39dc487c95226fe84d2c460072" upstream="master" dest-branch="master"/>
-  <project name="kernel" revision="4124065a2763eb8097806289b4825c8933b82efc" upstream="stable-5.10-rk3588" dest-branch="stable-5.10-rk3588"/>
-  <project name="lubancat-bin" revision="da4446576b196334590e59a9ec4cb2a094980bdf" upstream="rk3588" dest-branch="rk3588"/>
-  <project name="rkbin" revision="2dde28de6e47f5003683cd3a20b4243c63e6b2fb" upstream="main" dest-branch="main"/>
-  <project name="tools" revision="210be81d659a6bc4e7a648744ae77837f394be0f" upstream="master" dest-branch="master">
+  <project name="gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" revision="adbb295a970c4b39dc487c95226fe84d2c460072" dest-branch="master" clone-depth="1"/>
+  <project name="kernel" revision="f389e35f34e1c50bcfa6c1f989f4cec7776a8671" dest-branch="stable-5.10-rk3588" clone-depth="1"/>
+  <project name="lubancat-bin" revision="657df4b284c429b100988c40d27441236781d350" dest-branch="rk3588" clone-depth="1"/>
+  <project name="rkbin" revision="refs/tags/lbc-gen-rkr8" clone-depth="1"/>
+  <project name="tools" revision="210be81d659a6bc4e7a648744ae77837f394be0f" dest-branch="master" clone-depth="1">
     <linkfile src="windows/RKDevTool/RKDevTool_Release/rk3588-config.cfg" dest="tools/windows/RKDevTool/RKDevTool_Release/config.cfg"/>
     <linkfile src="windows/RKDevTool/rockdev/rk3588-package-file" dest="tools/windows/RKDevTool/rockdev/package-file"/>
     <linkfile src="windows/RKDevTool/rockdev/rk3588-mkupdate.bat" dest="tools/windows/RKDevTool/rockdev/mkupdate.bat"/>
@@ -24,5 +24,5 @@
     <linkfile src="linux/Linux_Pack_Firmware/rockdev/rk3588-package-file" dest="tools/linux/Linux_Pack_Firmware/rockdev/package-file"/>
   </project>
   <project name="u-boot" revision="refs/tags/lbc-gen-rkr7.1" clone-depth="1"/>
-  <project name="ubuntu" revision="refs/tags/stable-5.10-rk3588" clone-depth="1"/>
+  <project name="ubuntu" revision="6a472c39697b570efd78231b923e401a16a86844" dest-branch="stable-5.10-rk3588" clone-depth="1"/>
 </manifest>
