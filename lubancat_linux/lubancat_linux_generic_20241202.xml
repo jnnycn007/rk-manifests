@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- <remote name="origin" fetch="ssh://git@gitlab.ebf.local/rockchip/linux/"/> -->
+  <remote name="origin" fetch="https://github.com/LubanCat/"/>
+  
+  <default remote="origin" sync-j="4"/>
+  
+  <project name="debian11" path="debian" revision="a1105e0330b7547cf72314df2b426dc4bfdf9d2d" dest-branch="debian11" clone-depth="1"/>
+  <project name="device_rockchip" path="device/rockchip" revision="ab11efadfe594acbcfb684bd50b59a35705e8386" dest-branch="main" clone-depth="1">
+    <linkfile src="common/scripts/build.sh" dest="build.sh"/>
+    <linkfile src="common/Makefile" dest="Makefile"/>
+    <linkfile src="common/scripts/rkflash.sh" dest="rkflash.sh"/>
+  </project>
+  <project name="gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu" revision="adbb295a970c4b39dc487c95226fe84d2c460072" clone-depth="1"/>
+  <project name="gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf" path="prebuilts/gcc/linux-x86/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf" revision="2e89382ca3f8c34086272509ae4d7a5c340ffafc" clone-depth="1"/>
+  <project name="kernel" revision="09091534efd098bd9b18c748eab12908e3d6860e" dest-branch="lbc-develop-5.10" clone-depth="1"/>
+  <project name="lubancat-bin" revision="657df4b284c429b100988c40d27441236781d350" dest-branch="main" clone-depth="1"/>
+  <project name="rkbin" revision="refs/tags/lbc-gen-rkr8" clone-depth="1"/>
+  <project name="tools" revision="refs/tags/lbc-gen-rkr7" clone-depth="1"/>
+  <project name="u-boot" revision="refs/tags/lbc-gen-rkr7.1" clone-depth="1"/>
+  <project name="ubuntu" path="ubuntu20.04" revision="c09383a0a8cbd35c9d2e4eee76b44a64dad561f6" dest-branch="ubuntu20.04" clone-depth="1"/>
+  <project name="ubuntu" path="ubuntu22.04" revision="9c225593d56dcc332277be6a9a5c082b565b77c5" dest-branch="ubuntu22.04" clone-depth="1"/>
+</manifest>
