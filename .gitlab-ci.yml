@@ -1,0 +1,136 @@
+variables:
+  #NAS地址 
+  NAS_URL1: /mnt/百度云对外发布资料/Linux产品线/鲁班猫_瑞芯微系列/8-SDK源码压缩包及虚拟机/LubanCat_Linux_SDK
+  # NAS_URL1: /mnt/百度云内部资料/测试/LubanCat_SDK
+
+stages: # 分段
+  - pack
+
+pack-generic:
+  tags:
+    - ENABLE
+  stage: pack
+  when: manual
+  before_script:
+    - git config --global user.email "embedfire@embedfire.com"
+    - git config --global user.name "LubanCat"
+  script:
+    - now="`date +%Y%m%d`"
+    - XML_FILE="lubancat_linux_generic.xml"
+    - FILE_NAME="LubanCat_Linux_Generic_SDK"
+    - TAR_NAME="${FILE_NAME}_${now}.tgz"
+
+    - echo TAR_NAME=$TAR_NAME
+    # 创建工作目录
+    - mkdir LubanCat_SDK && cd LubanCat_SDK
+    # 拉取manifests仓库
+    - repo init --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -u https://github.com/LubanCat/manifests.git -b linux -m ${XML_FILE}
+    # 替换为内部gitlab地址
+    - sed -i '/github/ s/^/  <!--/; /github/ s/$/ -->/' .repo/manifests/${XML_FILE}
+    - sed -i '/gitlab/ s/<!--*//;/gitlab/ s/ *-->//' .repo/manifests/${XML_FILE}
+    - cat .repo/manifests/${XML_FILE}
+    # 拉取仓库
+    - .repo/repo/repo sync -c -v
+    # 替换回github地址
+    - sed -i '/gitlab/ s/^/  <!--/; /gitlab/ s/$/ -->/' .repo/manifests/${XML_FILE}
+    - sed -i '/github/ s/<!--*//;/github/ s/ *-->//' .repo/manifests/${XML_FILE}
+    - cat .repo/manifests/${XML_FILE}
+    # 重新拉取，替换仓库地址为github
+    - .repo/repo/repo sync -c -v
+    # 打包：pigz打包更快
+    - tar -cvf - .repo/ | pigz > $TAR_NAME
+    # 显示本地文件列表
+    - ls -hl
+    # 删除原来的源码包
+    - rm -rf $NAS_URL1/${FILE_NAME}*.tgz  
+    # 发布
+    - cp -v $TAR_NAME $NAS_URL1
+    # 清理
+    - cd .. && rm -rf LubanCat_SDK
+
+
+pack-rk3588:
+  tags:
+    - ENABLE
+  stage: pack
+  when: manual
+  before_script:
+    - git config --global user.email "embedfire@embedfire.com"
+    - git config --global user.name "LubanCat"
+  script:
+    - now="`date +%Y%m%d`"
+
+    - XML_FILE="rk3588_linux_release.xml"
+    - FILE_NAME="LubanCat_Linux_rk3588_SDK"
+    - TAR_NAME="${FILE_NAME}_${now}.tgz"
+
+    - echo TAR_NAME=$TAR_NAME
+    # 创建工作目录
+    - mkdir LubanCat_SDK && cd LubanCat_SDK
+    # 拉取manifests仓库
+    - repo init --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -u https://github.com/LubanCat/manifests.git -b linux -m ${XML_FILE}
+    # 替换为内部gitlab地址
+    - sed -i '/github/ s/^/  <!--/; /github/ s/$/ -->/' .repo/manifests/${XML_FILE}
+    - sed -i '/gitlab/ s/<!--*//;/gitlab/ s/ *-->//' .repo/manifests/${XML_FILE}
+    - cat .repo/manifests/${XML_FILE}
+    # 拉取仓库
+    - .repo/repo/repo sync -c -v
+    # 替换回github地址
+    - sed -i '/gitlab/ s/^/  <!--/; /gitlab/ s/$/ -->/' .repo/manifests/${XML_FILE}
+    - sed -i '/github/ s/<!--*//;/github/ s/ *-->//' .repo/manifests/${XML_FILE}
+    - cat .repo/manifests/${XML_FILE}
+    # 重新拉取，替换仓库地址为github
+    - .repo/repo/repo sync -c -v
+    # 打包：pigz打包更快
+    - tar -cvf - .repo/ | pigz > $TAR_NAME
+    # 显示本地文件列表
+    - ls -hl
+    # 删除原来的源码包
+    - rm -rf $NAS_URL1/${FILE_NAME}*.tgz 
+    # 发布
+    - cp -v $TAR_NAME $NAS_URL1
+    # 清理
+    - cd .. && rm -rf LubanCat_SDK
+
+pack-rk356x:
+  tags:
+    - ENABLE
+  stage: pack
+  when: manual
+  before_script:
+    - git config --global user.email "embedfire@embedfire.com"
+    - git config --global user.name "LubanCat"
+  script:
+    - now="`date +%Y%m%d`"
+
+    - XML_FILE="rk356x_linux_release.xml"
+    - FILE_NAME="LubanCat_Linux_rk356x_SDK"
+    - TAR_NAME="${FILE_NAME}_${now}.tgz"
+
+    - echo TAR_NAME=$TAR_NAME
+    # 创建工作目录
+    - mkdir LubanCat_SDK && cd LubanCat_SDK
+    # 拉取manifests仓库
+    - repo init --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -u https://github.com/LubanCat/manifests.git -b linux -m ${XML_FILE}
+    # 替换为内部gitlab地址
+    - sed -i '/github/ s/^/  <!--/; /github/ s/$/ -->/' .repo/manifests/${XML_FILE}
+    - sed -i '/gitlab/ s/<!--*//;/gitlab/ s/ *-->//' .repo/manifests/${XML_FILE}
+    - cat .repo/manifests/${XML_FILE}
+    # 拉取仓库
+    - .repo/repo/repo sync -c -v
+    # 替换回github地址
+    - sed -i '/gitlab/ s/^/  <!--/; /gitlab/ s/$/ -->/' .repo/manifests/${XML_FILE}
+    - sed -i '/github/ s/<!--*//;/github/ s/ *-->//' .repo/manifests/${XML_FILE}
+    - cat .repo/manifests/${XML_FILE}
+    # 重新拉取，替换仓库地址为github
+    - .repo/repo/repo sync -c -v
+    # 打包：pigz打包更快
+    - tar -cvf - .repo/ | pigz > $TAR_NAME
+    # 显示本地文件列表
+    - ls -hl
+    # 删除原来的源码包
+    - rm -rf $NAS_URL1/${FILE_NAME}*.tgz 
+    # 发布
+    - cp -v $TAR_NAME $NAS_URL1
+    # 清理
+    - cd .. && rm -rf LubanCat_SDK
