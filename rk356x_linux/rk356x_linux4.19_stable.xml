@@ -5,7 +5,7 @@
   
   <default remote="origin" sync-j="4"/>
   
-  <project name="debian" revision="fb16e9983e994af0442241b3bcfd369e4f74a862" dest-branch="stable-4.19-rk356x" clone-depth="1"/>
+  <project name="debian" revision="9c0a709dd6330f1ece609ef369471e9299af9d0a" dest-branch="stable-4.19-rk356x" clone-depth="1"/>
   <project name="device_rockchip" path="device/rockchip" revision="867ec16715f3d83e4010df9bcb1a1bce26be4ad0" dest-branch="master" clone-depth="1">
     <linkfile src="common/mkfirmware.sh" dest="mkfirmware.sh"/>
     <linkfile src="common/build.sh" dest="build.sh"/>
@@ -14,7 +14,7 @@
   </project>
   <project name="gcc-buildroot-9.3.0-2020.03-x86_64_aarch64-rockchip-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-buildroot-9.3.0-2020.03-x86_64_aarch64-rockchip-linux-gnu" revision="427f5439bf87835ff3b20746acc8aaafba7d4f53" upstream="master" dest-branch="master" clone-depth="1"/>
   <project name="gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu" path="prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu" revision="f96f76d6be89a6e28d4dac1f233f9aca9921f69b" upstream="master" dest-branch="master" clone-depth="1"/>
-  <project name="kernel" revision="eb6aef454b146bc51869138fe238e132dcd957da" dest-branch="stable-4.19-rk356x" clone-depth="1"/>
+  <project name="kernel" revision="d2778c9560b43895f9fa293a6748c52213029d42" dest-branch="stable-4.19-rk356x" clone-depth="1"/>
   <project name="lubancat-bin" revision="657df4b284c429b100988c40d27441236781d350" dest-branch="main" clone-depth="1"/>
   <project name="rkbin" revision="refs/tags/lbc-gen-rkr8" clone-depth="1"/>
   <project name="tools" revision="210be81d659a6bc4e7a648744ae77837f394be0f" dest-branch="master" clone-depth="1">
@@ -25,5 +25,5 @@
     <linkfile src="linux/Linux_Pack_Firmware/rockdev/rk356x-package-file" dest="tools/linux/Linux_Pack_Firmware/rockdev/package-file"/>
   </project>
   <project name="u-boot" revision="refs/tags/lbc-gen-rkr7.1" clone-depth="1"/>
-  <project name="ubuntu" revision="ff88063b4b703f9c706b16f075c3bafac8ad64e6" dest-branch="stable-4.19-rk356x" clone-depth="1"/>
+  <project name="ubuntu" revision="5b8ba30e5aa702a97dba9bc9a5117b838ec929af" dest-branch="stable-4.19-rk356x" clone-depth="1"/>
 </manifest>
