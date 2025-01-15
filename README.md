@@ -3,7 +3,7 @@
 ## Ubuntu LTS
 ```
 # 安装SDK构建所需要的软件包
-sudo apt install git ssh make gcc libssl-dev liblz4-tool u-boot-tools curl\
+sudo apt install git ssh make gcc libssl-dev liblz4-tool u-boot-tools curl \
 expect g++ patchelf chrpath gawk texinfo chrpath diffstat binfmt-support \
 qemu-user-static live-build bison flex fakeroot cmake gcc-multilib g++-multilib \
 unzip device-tree-compiler python-pip libncurses5-dev python3-pyelftools \
@@ -72,6 +72,16 @@ python -V
 -   可维护性：由于LubanCat系列中子系列日益增加，通用SDK同时开发多个soc的特点，有效提升了产品的可维护性，做到对旧产品的超长期维护。
 -   构建命令：通用SDK与专用SDK编译命令基本一致，并且在通用SDK中增加了一些更加便利的命令，如使用make kconfig修改内核配置文件，开发更便利。
 
+### SDK支持情况
+
+通用SDK：rk3128、rk3528、rk3562、rk3566、rk3568、rk3588
+
+专用SDK：
+
+-   RK356x-SDK:rk3566、rk3568
+-   RK3588-SDK:rk3588、rk3588s
+-   RK3576-SDK:rk3576
+
 ### 拉取通用SDK
 
 ```
@@ -95,7 +105,14 @@ repo --trace init --depth=1 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/
 
 ```
 #github地址(用户使用)
+# rk356x
 repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk356x_linux_release.xml
+
+# rk3588
+repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk3588_linux_release.xml
+
+# rk3576
+repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk3576_linux_release.xml
 
 #内部地址(内部开发使用)
 repo init -u git@gitlab.ebf.local:rockchip/linux/manifests.git -b linux -m rk356x_linux_release.xml
@@ -110,7 +127,7 @@ repo --trace init --depth=1 --repo-url https://mirrors.tuna.tsinghua.edu.cn/git/
 ## 更新同步源码
 
 ```
-.repo/repo/repo --trace sync -c -j4
+.repo/repo/repo sync -c -j4
 
 # 使用 --depth=1 拉取源码后，大部分仓库同步后仅有最新的一次提交，可以使用以下命令来获取完整的仓库
 # 进入git仓库内，例如kernel
