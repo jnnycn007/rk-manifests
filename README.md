@@ -72,15 +72,23 @@ python -V
 -   可维护性：由于LubanCat系列中子系列日益增加，通用SDK同时开发多个soc的特点，有效提升了产品的可维护性，做到对旧产品的超长期维护。
 -   构建命令：通用SDK与专用SDK编译命令基本一致，并且在通用SDK中增加了一些更加便利的命令，如使用make kconfig修改内核配置文件，开发更便利。
 
-### SDK支持情况
+### 板卡支持情况
 
-通用SDK：rk3128、rk3528、rk3562、rk3566、rk3568、rk3588
+通用SDK：同时支持以下板卡
+
+-   使用rk3128主芯片的板卡：鲁班猫0H
+-   使用rk3528主芯片的板卡：鲁班猫Q1系列
+-   使用rk3562主芯片的板卡：鲁班猫1H
+-   使用rk3566主芯片的板卡：鲁班猫0系列、鲁班猫1系列
+-   使用rk3568主芯片的板卡：鲁班猫2系列
+-   使用rk3576主芯片的板卡：鲁班猫3系列
+-   使用rk3588s主芯片的板卡：鲁班猫4系列
+-   使用rk3588主芯片的板卡：鲁班猫5系列
 
 专用SDK：
 
--   RK356x-SDK:rk3566、rk3568
--   RK3588-SDK:rk3588、rk3588s
--   RK3576-SDK:rk3576
+-   RK356x-SDK:使用rk3566、rk3568主芯片的板卡
+-   RK3588-SDK:使用rk3588、rk3588s主芯片的板卡
 
 ### 拉取通用SDK
 
@@ -110,9 +118,6 @@ repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linu
 
 # rk3588
 repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk3588_linux_release.xml
-
-# rk3576
-repo --trace init --depth=1 -u https://github.com/LubanCat/manifests.git -b linux -m rk3576_linux_release.xml
 
 #内部地址(内部开发使用)
 repo init -u git@gitlab.ebf.local:rockchip/linux/manifests.git -b linux -m rk356x_linux_release.xml
